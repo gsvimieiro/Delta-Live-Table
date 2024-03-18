@@ -6,5 +6,5 @@ Principais Funcionalidades:
 - Auto-Loader
 - Batch & Streaming
 - CDC (Change Data Capture)
-- SCD Type 2 (Slow Change Dimension)
-- Monitoramento de qualidade dos Dados
+- SCD Type 2 (Slow Change Dimension) - Somente nas versões PRO e Advanced
+- Monitoramento de qualidade dos Dados - Somente na versão Advanced
