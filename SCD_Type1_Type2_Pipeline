@@ -1,0 +1,63 @@
+%sql
+
+-- Criação da table target_scd1
+
+
+CREATE OR REFRESH STREAMING TABLE target_scd1;
+
+APPLY CHANGES INTO
+  live.target_scd1
+FROM
+  stream(cdc_data.users)
+KEYS
+  (userId)
+APPLY AS DELETE WHEN
+  operation = "DELETE"
+SEQUENCE BY
+  sequenceNum
+COLUMNS * EXCEPT
+  (operation, sequenceNum)
+STORED AS
+  SCD_TYPE_1;
+
+-- Criação da table target_scd2
+
+
+CREATE OR REFRESH STREAMING TABLE target_scd2;
+
+APPLY CHANGES INTO
+  live.target_scd2
+FROM
+  stream(cdc_data.users)
+KEYS
+  (userId)
+APPLY AS DELETE WHEN
+  operation = "DELETE"
+SEQUENCE BY
+  sequenceNum
+COLUMNS * EXCEPT
+  (operation, sequenceNum)
+STORED AS
+  SCD_TYPE_2;
+
+
+-- Criação da table target_scd2_TH
+
+CREATE OR REFRESH STREAMING TABLE target_scd2_TH;
+
+APPLY CHANGES INTO
+  live.target_scd2_TH
+FROM
+  stream(cdc_data.users)
+KEYS
+  (userId)
+APPLY AS DELETE WHEN
+  operation = "DELETE"
+SEQUENCE BY
+  sequenceNum
+COLUMNS = EXCEPT
+  (operation, sequenceNum)
+STORED AS
+  SCD_TYPE_2_TH
+TRACK HISTORY ON * EXCEPT
+  (city);
