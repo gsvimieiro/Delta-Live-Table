@@ -1,0 +1,15 @@
+%sql
+CREATE SCHEMA IF NOT EXISTS cdc_data;
+
+CREATE TABLE IF NOT EXISTS cdc_data.users (
+  userId INT,
+  name STRING,
+  city STRING,
+  operation STRING,
+  sequenceNum INT
+);
+
+-- Insire os dados na tabela
+INSERT INTO cdc_data.users VALUES
+  (1, 'GIULIANO', 'NOVA LIMA', 'INSERT', 1),
+  (2, 'ELIANE', 'BELO HORIZONTE', 'INSERT', 1);
